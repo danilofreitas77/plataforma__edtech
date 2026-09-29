@@ -141,3 +141,19 @@ Componentes shadcn: `pnpm dlx shadcn@latest add <componente>` (já configurado e
 
 - `docs/arquitetura.md` — visão geral, multi-tenancy, modelo de dados, RLS, notificações.
 - `docs/fase-1-nucleo.md` — escopo, critérios de aceite e ordem de implementação da fase 1.
+- `docs/decisoes.md` — o porquê das decisões de negócio e técnicas, fases seguintes e pendências.
+
+## Skills do projeto (`.claude/skills/`)
+
+- **`seguranca`** — **obrigatória** em toda tarefa que toque auth, sessão, RLS, migrations, server actions, route handlers, uploads, dados pessoais, env, dependências, headers, logs, backup ou deploy. Antes de concluir qualquer tarefa, preencha `references/checklist-pr.md` na descrição do PR. Incidentes: `references/plano-recuperacao.md`.
+- **`frontend-design`** — use ao criar ou redesenhar telas e ao definir a identidade visual.
+
+## Design da interface
+
+- Isto é **produto**, não landing page: clareza e velocidade de uso vêm antes de efeito visual. Aplique a skill `frontend-design` com esse filtro — a personalidade vem da tipografia, das cores e dos detalhes, não de animações.
+- Dois públicos:
+  - **Alunos** (adolescentes, no celular, muitas vezes com internet ruim): telas leves, ações óbvias, feedback imediato no envio.
+  - **Professores** (desktop e tablet, corrigindo em volume): densidade de informação, atalhos, zero cliques desnecessários na fila de correção.
+- A cor primária é **do tenant** (`--brand`). O design precisa funcionar bem com qualquer cor que o professor escolher: nada de depender da cor da marca para contraste de texto.
+- Antes de criar a identidade visual base do produto, apresente o plano da skill (paleta, tipografia, layout) e espere aprovação.
+- Microcopy em português do Brasil, direto, na voz da interface: "Enviar redação", "Redação enviada", "Publicar correção".

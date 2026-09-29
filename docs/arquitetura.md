@@ -51,6 +51,8 @@ Supabase
 
 Status de membership: `pending` → `approved` \| `rejected` \| `suspended`. Só `approved` acessa conteúdo.
 
+**MFA:** `owner`, `teacher` e `platform_admin` precisam de MFA (TOTP). Sem sessão `aal2`, o app redireciona para o cadastro/verificação do fator e o RLS não concede acesso de staff. Alunos: opcional.
+
 ## Modelo de dados
 
 > Todas as tabelas têm `id uuid pk default gen_random_uuid()`, `created_at` e `updated_at`, exceto onde indicado.
@@ -276,7 +278,7 @@ Funções auxiliares no schema `app`, todas `security definer`, `stable` e com `
 -- papel aprovado do usuário atual no tenant (null se não tiver)
 create function app.current_role(t uuid) returns text ...
 
-create function app.is_staff(t uuid) returns boolean ...  -- owner ou teacher aprovado
+create function app.is_staff(t uuid) returns boolean ...  -- owner ou teacher aprovado E sessão com MFA (jwt aal = 'aal2')
 create function app.is_member(t uuid) returns boolean ... -- qualquer papel aprovado
 create function app.in_class(c uuid) returns boolean ...  -- usuário atual está na turma
 ```

@@ -35,5 +35,5 @@ Na primeira vez: `pnpm exec playwright install chromium`.
 
 ## Status
 
-- [x] Etapa 0 — setup do projeto
+- [x] Etapa 0 — setup do projeto (+ baseline de segurança: headers, MFA, política de senha, sessão, gitleaks, audit, Dependabot, health check)
 - [ ] Etapa 1 — tenants + resolução por subdomínio
