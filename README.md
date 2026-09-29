@@ -1,36 +1,39 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Plataforma de Redação
 
-## Getting Started
+SaaS multi-tenant para professores e cursinhos de redação (Enem): envio de redações, correção por competência, dúvidas, materiais, aulas e notificações. PWA.
 
-First, run the development server:
+- Arquitetura: [`docs/arquitetura.md`](docs/arquitetura.md)
+- Plano da fase 1: [`docs/fase-1-nucleo.md`](docs/fase-1-nucleo.md)
+- Regras para o Claude Code: [`CLAUDE.md`](CLAUDE.md)
+
+## Stack
+
+Next.js 16 (App Router) · TypeScript · Tailwind + shadcn/ui · Supabase (Postgres + RLS, Auth, Storage) · Vitest · Playwright · pgTAP · GitHub Actions · Vercel
+
+## Rodando localmente
+
+Pré-requisitos: Node 22, pnpm 10, Docker.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+pnpm install
+pnpm db:start              # sobe Supabase local (Docker)
+cp .env.example .env.local # cole as chaves que o db:start mostrou
+pnpm db:reset              # aplica migrations + seed
+pnpm dev                   # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Tenants rodam em subdomínio: `http://<slug>.localhost:3000` (a partir da etapa 1).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Verificação
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+pnpm check   # lint + typecheck + vitest + testes de RLS
+pnpm e2e     # playwright (desktop + mobile)
+```
 
-## Learn More
+Na primeira vez: `pnpm exec playwright install chromium`.
 
-To learn more about Next.js, take a look at the following resources:
+## Status
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- [x] Etapa 0 — setup do projeto
+- [ ] Etapa 1 — tenants + resolução por subdomínio

@@ -1,0 +1,1 @@
+-- Seed de desenvolvimento. Preenchido na etapa 1 (tenants demo-a e demo-b).

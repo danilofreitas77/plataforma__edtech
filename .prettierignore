@@ -1,0 +1,4 @@
+pnpm-lock.yaml
+.next
+supabase/.temp
+src/lib/db/types.ts
